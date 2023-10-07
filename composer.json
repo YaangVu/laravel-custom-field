@@ -22,7 +22,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "YaangVu\\LaravelCustomField\\LaravelCustomFieldServiceProvider"
+        "Yaangvu\\LaravelCustomField\\LaravelCustomFieldServiceProvider"
       ]
     }
   }
