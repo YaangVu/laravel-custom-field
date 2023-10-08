@@ -138,7 +138,13 @@ trait HasCustomFields
         $value['model_type']                  = get_class($this);
         $value['model_id']                    = $this->getAttribute($this->getKeyName());
         unset($value['value']);
-        $this->initCustomFieldValueModel()->newQuery()->updateOrCreate(['model_type', 'field_id', 'model_id'], $value);
+        $this->initCustomFieldValueModel()->newQuery()->updateOrCreate(
+            [
+                'model_type' => $value['model_type'],
+                'field_id'   => $value['field_id'],
+                'model_id'   => $value['model_id'],
+            ],
+            $value);
 
         return true;
     }
