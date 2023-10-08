@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create(config('custom-fields.tables.fields', 'custom_fields'), function (Blueprint $table) {
+        Schema::create(config('custom-fields.tables.custom-fields', 'custom_fields'), function (Blueprint $table) {
             $table->id();
             $table->string('model_type');
             $table->string('type')->default(CustomFieldType::STRING->value)
@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->softDeletes();
         });
 
-        Schema::create(config('custom-fields.tables.field-values', 'custom_field_values'), function (Blueprint $table) {
+        Schema::create(config('custom-fields.tables.custom-field-values', 'custom_field_values'), function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('field_id');
             $table->foreign('field_id')->references('id')
@@ -58,7 +58,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('custom-fields.tables.fields', 'custom_fields'));
-        Schema::dropIfExists(config('custom-fields.tables.field_values', 'custom_field_values'));
+        Schema::dropIfExists(config('custom-fields.tables.custom-fields', 'custom_fields'));
+        Schema::dropIfExists(config('custom-fields.tables.custom-field-values', 'custom_field_values'));
     }
 };
