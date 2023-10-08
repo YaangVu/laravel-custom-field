@@ -22,8 +22,10 @@ abstract class AbstractValueType implements ValueType
     /**
      * @inheritDoc
      */
-    public function setValue(mixed $value): void
+    public function setValue(mixed $value): static
     {
         $this->fieldValue->setAttribute($this->getField()->value, $this->castValue($value));
+
+        return $this;
     }
 }

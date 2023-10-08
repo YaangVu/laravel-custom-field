@@ -14,7 +14,6 @@ class NumberValueType extends AbstractValueType implements ValueType
         return CustomFieldValueType::NUMBER;
     }
 
-
     /**
      * @inheritDoc
      */

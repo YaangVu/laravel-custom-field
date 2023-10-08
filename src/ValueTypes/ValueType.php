@@ -24,9 +24,9 @@ interface ValueType
      *
      * @param mixed $value
      *
-     * @return void
+     * @return ValueType
      */
-    public function setValue(mixed $value): void;
+    public function setValue(mixed $value): static;
 
     /**
      * Get value

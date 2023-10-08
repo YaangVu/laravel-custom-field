@@ -2,11 +2,10 @@
 
 namespace database\factories;
 
-use Exception;
-use Faker\Provider\Lorem;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Yaangvu\LaravelCustomFields\Enums\CustomFieldType;
-use Yaangvu\LaravelCustomFields\Models\CustomField;
+use Yaangvu\LaravelCustomField\Enums\CustomFieldType;
+use Yaangvu\LaravelCustomField\Models\CustomField;
+
 
 class CustomFieldFactory extends Factory
 {
@@ -22,118 +21,18 @@ class CustomFieldFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         /** @var CustomFieldType $type */
         $type = $this->faker->randomElement(CustomFieldType::cases());
 
         return [
             'type'        => $type->value,
+            'model_type'  => 'App\Models\User',
             'required'    => false,
-            'title'       => Lorem::sentence(3),
-            'description' => Lorem::sentence(3),
-            'answers'     => $type->requiresAnswers() ? Lorem::words() : [],
+            'title'       => fake()->sentence(3),
+            'description' => fake()->sentence(30),
+            'options'     => fake()->words(),
         ];
-    }
-
-    /**
-     * @return $this
-     */
-    public function withTypeCheckbox()
-    {
-        $this->model->type = CustomFieldType::CHECKBOX;
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function withTypeNumber()
-    {
-        $this->model->type = CustomFieldType::NUMBER;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $answerCount
-     *
-     * @return $this
-     * @throws Exception
-     */
-    public function withTypeRadio($answerCount = 3)
-    {
-        $this->model->type = CustomFieldType::RADIO;
-
-        return $this->withAnswers($answerCount);
-    }
-
-    /**
-     * @param mixed $optionCount
-     *
-     * @return $this
-     * @throws Exception
-     */
-    public function withTypeSelect($optionCount = 3)
-    {
-        $this->model->type = CustomFieldType::SELECT;
-
-        return $this->withAnswers($optionCount);
-    }
-
-    /**
-     * @return $this
-     */
-    public function withTypeText()
-    {
-        $this->model->type = CustomFieldType::TEXT;
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function withTypeTextArea()
-    {
-        $this->model->type = CustomFieldType::TEXTAREA;
-
-        return $this;
-    }
-
-    /**
-     * @param $defaultValue
-     *
-     * @return $this
-     */
-    public function withDefaultValue($defaultValue)
-    {
-        $this->model->default_value = $defaultValue;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $answers
-     *
-     * @return $this
-     * @throws Exception
-     */
-    public function withAnswers($answers = 3)
-    {
-        if (is_numeric($answers)) {
-            $this->model->answers = Lorem::words($answers);
-
-            return $this;
-        }
-
-        if (is_array($answers)) {
-            $this->model->answers = $answers;
-
-            return $this;
-        }
-
-        throw new Exception("withAnswers only accepts a number or an array");
     }
 }

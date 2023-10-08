@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Yaangvu\LaravelCustomFields\Enums\CustomFieldValueType;
+use Yaangvu\LaravelCustomField\Enums\CustomFieldType;
 
 return new class extends Migration {
     /**
@@ -16,7 +16,7 @@ return new class extends Migration {
         Schema::create(config('custom-fields.tables.fields', 'custom_fields'), function (Blueprint $table) {
             $table->id();
             $table->string('model_type');
-            $table->string('type')->default(CustomFieldValueType::STRING->value)
+            $table->string('type')->default(CustomFieldType::STRING->value)
                   ->comment('Type of custom field value');
             $table->string('title')->comment('Title of custom field');
             $table->boolean('required')->nullable()->comment('Require rule when submit value');
@@ -37,7 +37,9 @@ return new class extends Migration {
                   ->cascadeOnDelete();
             $table->unsignedBigInteger('model_id');
             $table->string('model_type');
-            $table->unique(['field_id', 'model_id', 'model_type']); // set unique for combine 3 columns: field_id, model_id, model_type
+            $table->unique(['field_id',
+                            'model_id',
+                            'model_type']); // set unique for combine 3 columns: field_id, model_id, model_type
             $table->boolean('value_boolean')->nullable();
             $table->string('value_string')->nullable();
             $table->text('value_text')->nullable();
