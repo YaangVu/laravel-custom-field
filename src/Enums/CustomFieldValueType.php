@@ -2,8 +2,12 @@
 
 namespace Yaangvu\LaravelCustomField\Enums;
 
+use Yaangvu\LaravelCustomField\Traits\EnumToArray;
+
 enum CustomFieldValueType: string
 {
+    use EnumToArray;
+
     case BOOLEAN  = 'value_boolean';
     case INT      = 'value_int';
     case NUMBER   = 'value_number';

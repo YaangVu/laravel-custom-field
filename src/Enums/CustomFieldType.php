@@ -2,8 +2,12 @@
 
 namespace Yaangvu\LaravelCustomField\Enums;
 
+use Yaangvu\LaravelCustomField\Traits\EnumToArray;
+
 enum CustomFieldType: string
 {
+    use EnumToArray;
+
     case CHECKBOX = 'checkbox';
     case INT      = 'int';
     case NUMBER   = 'number';
