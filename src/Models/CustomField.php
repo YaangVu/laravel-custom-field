@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class CustomField extends Model
 {
     protected $fillable
-        = ['model_type',
-           'title',
-           'required',
-           'description',
-           'default_value',
-           'options',
-           'order',
-           'archived_at'];
+        = [
+            'model_type',
+            'title',
+            'type',
+            'required',
+            'description',
+            'default_value',
+            'options',
+            'order',
+            'archived_at'
+        ];
 
     /**
      * Get all values that has field_id = fields.id
@@ -39,7 +42,9 @@ class CustomField extends Model
 
     public function options()
     {
-        return Attribute::make(get: fn(mixed $value) => json_decode($value),
-            set: fn(mixed $value) => json_encode($value),);
+        return Attribute::make(
+            get: fn(mixed $value) => json_decode($value),
+            set: fn(mixed $value) => json_encode($value)
+        );
     }
 }

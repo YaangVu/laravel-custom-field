@@ -9,16 +9,18 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class CustomFieldValue extends Model
 {
     protected $fillable
-        = ['field_id',
-           'model_id',
-           'model_type',
-           'value_boolean',
-           'value_string',
-           'value_text',
-           'value_int',
-           'value_number',
-           'value_json',
-           'value_datetime'];
+        = [
+            'field_id',
+            'model_id',
+            'model_type',
+            'value_boolean',
+            'value_string',
+            'value_text',
+            'value_int',
+            'value_number',
+            'value_json',
+            'value_datetime'
+        ];
 
     public function model(): MorphTo
     {
