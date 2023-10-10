@@ -40,11 +40,11 @@ class CustomField extends Model
         return $this->hasOne(CustomField::class);
     }
 
-    public function options()
+    protected function options(): Attribute
     {
         return Attribute::make(
             get: fn(mixed $value) => json_decode($value),
-            set: fn(mixed $value) => json_encode($value)
+            set: fn(array $value) => json_encode($value)
         );
     }
 }
